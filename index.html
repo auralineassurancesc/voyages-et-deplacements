@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assurance voyage — Auraline Assurances Courtage</title>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#1F3A5F"/><text x="60" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="#F4F1EA">AV</text><rect x="36" y="62" width="48" height="3" fill="#B08D57"/><text x="60" y="84" text-anchor="middle" font-family="Arial" font-size="9" letter-spacing="2" fill="#B08D57">VOYAGE</text></svg></template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;1,400&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--marine:#1F3A5F;--marine-900:#14263E;--dore:#B08D57;--dore-300:#CBAE82;--dore-700:#8F7145;--encre:#33383F;
+    --titre:'Spectral',Georgia,'Times New Roman',serif;--corps:'Source Sans 3',Arial,Helvetica,sans-serif}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  html,body{background:#14263E;font-family:var(--corps);color:var(--encre);-webkit-text-size-adjust:100%}
+  a{color:var(--dore-300);text-decoration:none}a:hover{color:#E4CFAA}
+  .wrap{max-width:none;margin:0 auto;padding:clamp(16px,3vw,40px) clamp(10px,1.2vw,20px);min-height:100dvh;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+  .head{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin:0 0 clamp(14px,2vw,24px);flex:0 0 auto}
+  .sur{font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--dore-300)}
+  .sur.big{font-size:clamp(14px,1.5vw,20px)}
+  .filet{display:block;width:56px;height:2px;background:var(--dore)}
+  .head h2{font-family:var(--titre);font-weight:400;font-size:clamp(22px,2.6vw,36px);line-height:1.2;color:#fff;margin:0;max-width:34ch;text-wrap:pretty}
+  .car{position:relative;width:100%;margin-left:auto;margin-right:auto;border-radius:10px;overflow:hidden;background:var(--marine-900);box-shadow:0 12px 36px rgba(31,58,95,.12),0 4px 10px rgba(31,58,95,.06);outline:none}
+  .stage{position:relative;width:100%;aspect-ratio:3/2;max-height:calc(100dvh - 230px);margin:0 auto;overflow:hidden;touch-action:pan-y}
+  @media (max-width:560px){.stage{aspect-ratio:4/5;max-height:calc(100dvh - 210px)}}
+  .track{position:absolute;inset:0}
+  .sl{position:absolute;inset:0;margin:0;opacity:0;overflow:hidden}
+  .sl img{width:100%;height:100%;object-fit:cover;display:block}
+  .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,38,62,.92) 0%,rgba(20,38,62,.74) 34%,rgba(20,38,62,.42) 58%,rgba(20,38,62,0) 88%)}
+  figcaption{position:absolute;left:0;right:0;bottom:0;padding:clamp(16px,2.4vw,40px);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  figcaption .sur{color:var(--dore-300)}
+  figcaption h3{font-family:var(--titre);font-weight:400;font-size:clamp(20px,3vw,40px);line-height:1.15;color:#fff;margin:0;text-wrap:pretty}
+  figcaption p{font-size:clamp(14px,1.3vw,18px);line-height:1.6;color:#fff;margin:0;max-width:46ch;text-wrap:pretty}
+  .slats{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .slats div{position:absolute;top:0;bottom:0;left:0;width:0;background-repeat:no-repeat;clip-path:inset(0 100% 0 0)}
+  .nav{position:absolute;width:48px;height:48px;display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(20,38,62,.42);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    color:#fff;cursor:pointer;transition:background 180ms cubic-bezier(.4,0,.2,1),border-color 180ms}
+  .nav:hover{background:rgba(20,38,62,.72);border-color:var(--dore)}
+  .nav:focus-visible{box-shadow:0 0 0 3px rgba(176,141,87,.55)}
+  .prev{right:calc(clamp(10px,1.5vw,24px) + 58px)}.next{right:clamp(10px,1.5vw,24px)}
+  .nav{top:clamp(12px,2vw,24px);transform:none}
+  .dots{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:14px 18px;background:var(--marine-900)}
+  .dots button{width:26px;height:3px;border:0;padding:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer;transition:background 220ms cubic-bezier(.4,0,.2,1)}
+  .dots button:focus-visible{box-shadow:0 0 0 3px rgba(176,141,87,.55)}
+  .dots button[aria-current="true"]{background:var(--dore)}
+
+  /* --- page voyage --- */
+  .sec{max-width:1264px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(16px,3vw,32px) clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)}
+  .intro{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(20px,3vw,56px);align-items:end}
+  .intro h2{font-family:var(--titre);font-weight:400;font-size:clamp(26px,3.4vw,44px);line-height:1.2;color:#fff;margin:0;max-width:22ch;text-wrap:pretty}
+  .intro .col{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+  .lead{font-size:clamp(16px,1.35vw,20px);line-height:1.7;margin:0;max-width:38ch;padding-left:clamp(0px,1.5vw,24px);border-left:1px solid rgba(255,255,255,.24);color:#fff;text-wrap:pretty}
+  .tickets{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,2vw,24px);align-items:stretch}
+  .ticket{position:relative;border-radius:10px;box-shadow:0 4px 16px rgba(5,12,22,.32);display:flex;align-items:stretch;min-height:210px;overflow:hidden;outline:none;
+    transition:transform 220ms cubic-bezier(.4,0,.2,1),box-shadow 220ms cubic-bezier(.4,0,.2,1),background 240ms cubic-bezier(.4,0,.2,1),border-color 240ms cubic-bezier(.4,0,.2,1)}
+  .ticket .stub{flex:0 0 74px;display:flex;align-items:center;justify-content:center;border-right:1px dashed #E6E0D2;transition:border-color 240ms}
+  .ticket .num{font-family:var(--titre);font-size:30px;line-height:1;letter-spacing:.04em;color:var(--dore);transform:rotate(-90deg);transition:color 240ms}
+  .ticket .body{flex:1 1 auto;min-width:0;padding:clamp(22px,2vw,30px);display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .ticket h3{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;line-height:1.4;color:var(--marine);margin:0;transition:color 240ms}
+  .ticket .rule{width:100%;height:1px;background:#E6E0D2;transition:background 240ms}
+  .ticket p{font-size:16px;line-height:1.7;color:var(--encre);margin:0;text-wrap:pretty;transition:color 240ms}
+  .ticket .notch{position:absolute;left:74px;width:18px;height:18px;border-radius:50%;background:#14263E;transform:translateX(-50%);pointer-events:none}
+  .ticket .notch.t{top:-9px}.ticket .notch.b{bottom:-9px}
+  .ticket.t1{background:#1F3A5F;border:1px solid #2B4E7C}
+  .ticket.t1 .num{color:#CBAE82}.ticket.t1 h3,.ticket.t1 p{color:#fff}
+  .ticket.t1 .rule{background:rgba(255,255,255,.28)}.ticket.t1 .stub{border-right-color:rgba(255,255,255,.32)}
+  .ticket.t2{background:#fff;border:1px solid rgba(255,255,255,.5)}
+  .ticket.t2 .num{color:#8F7145}.ticket.t2 h3{color:var(--marine)}.ticket.t2 p{color:var(--encre)}
+  .ticket.t2 .rule{background:#E6E0D2}.ticket.t2 .stub{border-right-color:#E6E0D2}
+  .ticket.t3{background:#A32A33;border:1px solid #B84048}
+  .ticket.t3 .num{color:#F6E2C8}.ticket.t3 h3,.ticket.t3 p{color:#fff}
+  .ticket.t3 .rule{background:rgba(255,255,255,.32)}.ticket.t3 .stub{border-right-color:rgba(255,255,255,.36)}
+  .ticket:hover,.ticket:focus-visible{border-color:rgba(176,141,87,.75);box-shadow:0 14px 34px rgba(5,12,22,.4);transform:translateY(-3px)}
+  .ticket.t1:hover,.ticket.t1:focus-visible{background:#27497A}
+  .ticket.t3:hover,.ticket.t3:focus-visible{background:#B93540}
+  .band{padding:clamp(24px,4vw,56px) clamp(16px,3vw,32px);background:transparent}
+  .band .inner{position:relative;max-width:1200px;margin:0 auto;border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(31,58,95,.08)}
+  .band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block}
+  .band .scrim2{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,38,62,.70) 0%,rgba(20,38,62,.50) 45%,rgba(20,38,62,.62) 100%)}
+  .band .content{position:relative;padding:clamp(36px,5vw,72px) clamp(20px,3vw,44px);display:flex;flex-direction:column;gap:clamp(28px,3.5vw,48px);align-items:center}
+  .band h2{font-family:var(--titre);font-weight:400;font-size:clamp(40px,7vw,86px);letter-spacing:.06em;line-height:1;color:var(--dore);margin:0;text-align:center}
+  .glass{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(14px,1.6vw,22px);align-items:stretch}
+  .glass article{opacity:0;transform:translateY(22px);transition:opacity 620ms cubic-bezier(.4,0,.2,1),transform 620ms cubic-bezier(.4,0,.2,1),background 260ms cubic-bezier(.4,0,.2,1),border-color 260ms cubic-bezier(.4,0,.2,1),box-shadow 260ms cubic-bezier(.4,0,.2,1);background:rgba(31,58,95,.34);border:1px solid rgba(255,255,255,.22);border-radius:6px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:clamp(20px,2vw,30px);display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .glass h3{font-family:var(--titre);font-weight:400;font-size:clamp(16px,1.4vw,20px);letter-spacing:.1em;text-transform:uppercase;line-height:1.3;color:#fff;margin:0;text-wrap:pretty}
+  .glass .rule{width:100%;height:1px;background:rgba(255,255,255,.28);transform:scaleX(0);transform-origin:left;transition:transform 700ms cubic-bezier(.4,0,.2,1) 180ms}
+  .glass article.in{opacity:1;transform:none}
+  .glass article.in .rule{transform:scaleX(1)}
+  .glass article:hover,.glass article:focus-visible{background:rgba(31,58,95,.52);border-color:rgba(176,141,87,.55);box-shadow:0 10px 28px rgba(10,20,34,.28);transform:translateY(-4px)}
+  .band h2{opacity:0;transform:translateY(16px);transition:opacity 700ms cubic-bezier(.4,0,.2,1),transform 700ms cubic-bezier(.4,0,.2,1)}
+  .band h2.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.glass article,.band h2{opacity:1;transform:none;transition:none}.glass .rule{transform:scaleX(1);transition:none}}
+  .glass p{font-size:16px;line-height:1.65;color:#fff;margin:0;text-wrap:pretty}
+  .partners{max-width:1264px;margin:0 auto;padding:clamp(32px,5vw,72px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:clamp(20px,3vw,32px);align-items:center;text-align:center}
+  .partners .row{display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,28px);justify-content:center}
+  .partners .logo{background:#fff;border:1px solid #E6E0D2;border-radius:10px;box-shadow:0 1px 3px rgba(31,58,95,.08);padding:24px 36px;display:flex;align-items:center;justify-content:center;min-width:220px}
+  .partners .logo img{display:block;width:auto;max-width:100%;object-fit:contain}
+  footer.legal{background:rgba(10,20,34,.55);border-top:1px solid rgba(255,255,255,.14);padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:18px}
+  footer.legal .links{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px}
+  footer.legal .links a{color:rgba(244,241,234,.9);text-decoration:underline;text-underline-offset:3px}
+  footer.legal .links span{color:rgba(244,241,234,.5)}
+  footer.legal a{color:rgba(244,241,234,.92);text-decoration:underline;text-underline-offset:3px}
+  .copy{background:#0A1422;border-top:1px solid rgba(255,255,255,.1);padding:clamp(20px,3vw,32px) clamp(16px,3vw,32px)}
+  .copy p{margin:0;font-family:var(--titre);font-size:clamp(15px,1.3vw,18px);line-height:1.6;color:rgba(244,241,234,.9);text-align:center}
+  footer.legal p{margin:0;font-size:13px;line-height:1.7;color:rgba(244,241,234,.82);text-align:justify;text-wrap:pretty}
+</style>
+</head>
+<body>
+<section class="wrap">
+  <header class="head">
+    <span class="sur">Assurance voyage</span>
+    <i class="filet"></i>
+    <h2>Où que vous partiez, <em>vous restez couvert</em></h2>
+  </header>
+  <div class="car" id="car" tabindex="0" aria-roledescription="carrousel" aria-label="Destinations et garanties">
+    <div class="stage">
+      <div class="track" id="track">
+      <figure class="sl">
+        <img src="images/maldives.jpg" alt="Bungalows sur pilotis aux Maldives" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur big">Partir en toute tranquillité</span>
+          <i class="filet"></i>
+          <h3>Maldives</h3>
+          <p>Assurance voyage internationale, ajustée selon votre profil et les critères de votre destination.</p>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/agra.jpg" alt="Le Taj Mahal vu depuis un porche sculpté, Agra" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Séjours longue durée</span>
+          <i class="filet"></i>
+          <h3>Agra, Inde</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/santorin-dome.jpg" alt="Dôme bleu et clocher blanc au-dessus de la mer, Santorin" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Bagages et effets personnels</span>
+          <i class="filet"></i>
+          <h3>Santorin, Grèce</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/desert.jpg" alt="Caravane de dromadaires dans les dunes du Sahara" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Assistance en zone isolée</span>
+          <i class="filet"></i>
+          <h3>Sahara</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/oahu.jpg" alt="Côte verdoyante et lagon vus du ciel, O‘ahu" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Activités et sports de loisir</span>
+          <i class="filet"></i>
+          <h3>Île d'O‘ahu, Hawaï</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/venise.jpg" alt="Le Grand Canal et ses palais au crépuscule, Venise" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Annulation et interruption</span>
+          <i class="filet"></i>
+          <h3>Venise, Italie</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/thailande.jpg" alt="Danseurs masqués de Khon en costume traditionnel, Thaïlande" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Frais médicaux avancés</span>
+          <i class="filet"></i>
+          <h3>Bangkok, Thaïlande</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/vol.jpg" alt="Aile d'avion au-dessus des nuages" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Retard et annulation de vol</span>
+          <i class="filet"></i>
+          <h3>En vol</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/bagages.jpg" alt="Chargement des bagages sur le tarmac" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Bagages retardés ou perdus</span>
+          <i class="filet"></i>
+          <h3>À l'aéroport</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/plage.jpg" alt="Plage et lagon turquoise vus du ciel" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Responsabilité civile à l'étranger</span>
+          <i class="filet"></i>
+          <h3>Océan Indien</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/campus.jpg" alt="Groupe d'étudiants sur un campus universitaire" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Étudiants à l'étranger</span>
+          <i class="filet"></i>
+          <h3>Sur le campus</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/coworking.jpg" alt="Deux personnes devant un ordinateur portable dans un bureau partagé" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Stages et missions professionnelles</span>
+          <i class="filet"></i>
+          <h3>Stage pro à l'étranger</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/bibliotheque.jpg" alt="Salle de lecture d'une bibliothèque universitaire" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Séjours d'études</span>
+          <i class="filet"></i>
+          <h3>En bibliothèque</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/rotterdam.jpg" alt="Pont Érasme et front de fleuve au crépuscule, Rotterdam" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Séjours en Europe</span>
+          <i class="filet"></i>
+          <h3>Rotterdam, Pays-Bas</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/tapis-bagages.jpg" alt="Tapis de livraison des bagages dans un aéroport" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Retard de livraison des bagages</span>
+          <i class="filet"></i>
+          <h3>À l'arrivée</h3>
+        </figcaption>
+      </figure>
+      <figure class="sl">
+        <img src="images/ville.jpg" alt="Voyageuse avec un sac à dos dans une ville ensoleillée" loading="lazy" decoding="async">
+        <div class="scrim"></div>
+        <figcaption>
+          <span class="sur">Téléconsultation et premiers secours</span>
+          <i class="filet"></i>
+          <h3>En ville</h3>
+        </figcaption>
+      </figure>
+      </div>
+      <div class="slats" id="slats" aria-hidden="true">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      </div>
+      <button type="button" class="nav prev" id="prev" aria-label="Image précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button type="button" class="nav next" id="next" aria-label="Image suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <div class="dots" id="dots">
+      <button type="button" aria-label="Aller à l'image 1"></button>
+      <button type="button" aria-label="Aller à l'image 2"></button>
+      <button type="button" aria-label="Aller à l'image 3"></button>
+      <button type="button" aria-label="Aller à l'image 4"></button>
+      <button type="button" aria-label="Aller à l'image 5"></button>
+      <button type="button" aria-label="Aller à l'image 6"></button>
+      <button type="button" aria-label="Aller à l'image 7"></button>
+      <button type="button" aria-label="Aller à l'image 8"></button>
+      <button type="button" aria-label="Aller à l'image 9"></button>
+      <button type="button" aria-label="Aller à l'image 10"></button>
+      <button type="button" aria-label="Aller à l'image 11"></button>
+      <button type="button" aria-label="Aller à l'image 12"></button>
+      <button type="button" aria-label="Aller à l'image 13"></button>
+      <button type="button" aria-label="Aller à l'image 14"></button>
+      <button type="button" aria-label="Aller à l'image 15"></button>
+      <button type="button" aria-label="Aller à l'image 16"></button>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="intro">
+    <div class="col">
+      <span class="sur">Une protection adaptée à chaque situation</span>
+      <i class="filet"></i>
+      <h2>Frais de santé non planifiés, rapatriement requis, <em>annulation de séjour.</em></h2>
+    </div>
+    <p class="lead">Votre contrat apporte une couverture à chaque étape de votre déplacement à l'étranger.</p>
+  </div>
+  <div class="tickets">
+      <article class="ticket t1" tabindex="0">
+        <div class="stub"><span class="num">01</span></div>
+        <div class="body">
+          <h3>Assurance voyage</h3>
+          <div class="rule"></div>
+          <p>Nous étudions les solutions couvrant l'ensemble du foyer : assistance médicale, prise en charge hospitalière et risque d'annulation.</p>
+        </div>
+        <span class="notch t"></span><span class="notch b"></span>
+      </article>
+      <article class="ticket t2" tabindex="0">
+        <div class="stub"><span class="num">02</span></div>
+        <div class="body">
+          <h3>Étudiants &amp; Erasmus</h3>
+          <div class="rule"></div>
+          <p>Nous comparons les couvertures adaptées aux études et stages à l'étranger, incluant la responsabilité civile privée.</p>
+        </div>
+        <span class="notch t"></span><span class="notch b"></span>
+      </article>
+      <article class="ticket t3" tabindex="0">
+        <div class="stub"><span class="num">03</span></div>
+        <div class="body">
+          <h3>Expatriés &amp; longs séjours</h3>
+          <div class="rule"></div>
+          <p>Nous sélectionnons les assurances santé internationales répondant aux exigences administratives de votre pays d'accueil.</p>
+        </div>
+        <span class="notch t"></span><span class="notch b"></span>
+      </article>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner">
+    <img src="images/aile-avion.jpg" alt="Vue de l'aile d'un avion au-dessus des nuages" loading="lazy" decoding="async">
+    <div class="scrim2"></div>
+    <div class="content">
+      <h2>VOYAGE</h2>
+      <div class="glass">
+        <article tabindex="0"><h3>Secours et rapatriement</h3><div class="rule"></div><p>Nous identifions les contrats couvrant les frais médicaux à l'étranger et l'organisation du rapatriement.</p></article>
+        <article tabindex="0"><h3>Annulations et imprévus</h3><div class="rule"></div><p>Nous étudions les solutions de remboursement des frais de séjour en cas d'imprévu, avant le départ ou pendant le voyage.</p></article>
+        <article tabindex="0"><h3>Équipements et valises</h3><div class="rule"></div><p>Nous comparons les garanties portant sur le vol, la perte ou la détérioration de vos effets personnels.</p></article>
+        <article tabindex="0"><h3>Responsabilité civile</h3><div class="rule"></div><p>Nous sélectionnons les couvertures des dommages causés involontairement à des tiers lors de vos déplacements.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <span class="sur">Assureurs partenaires pour les assurances voyage</span>
+  <i class="filet"></i>
+  <div class="row">
+    <div class="logo"><img src="images/logo-acs.png" alt="ACS — L'assurance qui bouge avec vous" style="height:56px" loading="lazy" decoding="async"></div>
+    <div class="logo"><img src="images/logo-april.png" alt="April" style="height:44px" loading="lazy" decoding="async"></div>
+  </div>
+</section>
+
+<footer class="legal">
+  <div class="links">
+    <a href="#mentions-legales">Mentions légales</a><span aria-hidden="true">·</span>
+    <a href="#confidentialite">Politique de confidentialité</a><span aria-hidden="true">·</span>
+    <a href="#cookies">Cookies</a>
+  </div>
+  <p>Auraline Assurances, dénomination commerciale de NDRI Pierre-Alain, entrepreneur individuel, siège social 36 rue Scheffer, 75016 Paris (adresse de domiciliation) · 990 332 462 R.C.S. Paris · ORIAS n° 26010853 depuis le 28/08/2026, Courtier en assurance (COA) sans maniement de fonds — registre consultable sur <a href="https://www.orias.fr">www.orias.fr</a> · Activité soumise au contrôle de l'ACPR, 4 place de Budapest, CS 92459, 75436 Paris Cedex 09.</p>
+  <p>Réclamation : <a href="mailto:reclamation@auralineassurances.fr">reclamation@auralineassurances.fr</a>, puis La Médiation de l'Assurance <a href="https://www.mediation-assurance.org/">https://www.mediation-assurance.org/</a> — TSA 50110, 75441 Paris Cedex 09.</p>
+  <p>Auraline Assurances Courtage — courtier en assurance immatriculé à l'ORIAS sous le n° 26010853 (www.orias.fr). Les garanties présentées sont indicatives ; leur étendue, leurs plafonds et leurs exclusions dépendent du contrat souscrit et sont détaillés dans les documents précontractuels remis avant souscription.</p>
+</footer>
+<div class="copy"><p>© 2026 Auraline Assurances. Tous droits réservés.</p></div>
+<script>
+(function(){
+  var reveal=[].slice.call(document.querySelectorAll('.band h2, .glass article'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target,k=reveal.indexOf(el);
+      el.style.transitionDelay=(k>0?(k-1)*110:0)+'ms';
+      el.classList.add('in');io.unobserve(el);});},{threshold:.2});
+    reveal.forEach(function(el){io.observe(el);});
+  }else{reveal.forEach(function(el){el.classList.add('in');});}
+})();
+</script>
+<script>
+(function(){
+  var track=document.getElementById('track'),slats=document.getElementById('slats'),dotsBox=document.getElementById('dots'),car=document.getElementById('car');
+  var slides=[].slice.call(track.children),panels=[].slice.call(slats.children),dots=[].slice.call(dotsBox.children);
+  var i=0,animating=false,pending=null,settle=null,timer=null,hover=false,first=true;
+  var DUR=460,STEP=16,INTERVAL=6000;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setDots(n){dots.forEach(function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});}
+  function commit(n){clearTimeout(settle);i=n;pending=null;animating=false;
+    slides.forEach(function(s,k){s.style.opacity=k===n?'1':'0';});
+    panels.forEach(function(el){if(el.getAnimations)el.getAnimations().forEach(function(a){a.cancel();});el.style.clipPath='inset(0 100% 0 0)';});}
+  function goTo(n){
+    n=((n%slides.length)+slides.length)%slides.length;
+    if(first){first=false;commit(n);setDots(n);return;}
+    if(animating)commit(pending!=null?pending:i);
+    if(n===i){setDots(n);return;}
+    if(reduce||!panels[0].animate){commit(n);setDots(n);return;}
+    var W=stage.clientWidth,H=stage.clientHeight,N=panels.length,img=slides[n].querySelector('img');
+    var iw=img.naturalWidth||W,ih=img.naturalHeight||H,sc=Math.max(W/iw,H/ih),sw=iw*sc,sh=ih*sc;
+    var ox=(W-sw)/2,oy=(H-sh)/2,pw=W/N;
+    animating=true;pending=n;
+    var anims=panels.map(function(el,k){
+      el.style.left=(k*pw)+'px';el.style.width=(pw+1)+'px';
+      el.style.backgroundColor='#14263E';
+      el.style.backgroundImage='url("'+img.getAttribute('src')+'")';
+      el.style.backgroundSize=sw+'px '+sh+'px';
+      el.style.backgroundPosition=(ox-k*pw)+'px '+oy+'px';
+      el.style.clipPath='inset(0 100% 0 0)';
+      return el.animate([{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],{duration:DUR,delay:k*STEP,easing:'cubic-bezier(.22,.61,.36,1)',fill:'forwards'});
+    });
+    setDots(n);
+    Promise.all(anims.map(function(a){return a.finished;})).then(function(){if(pending===n)commit(n);})['catch'](function(){});
+    settle=setTimeout(function(){if(animating&&pending===n)commit(n);},DUR+STEP*(N-1)+200);
+  }
+  var stage=document.querySelector('.stage');
+  function stop(){if(timer)clearInterval(timer);timer=null;}
+  function start(){stop();if(hover||document.hidden)return;timer=setInterval(function(){goTo(i+1);},INTERVAL);}
+  function step(d){goTo(i+d);start();}
+  document.getElementById('prev').addEventListener('click',function(){step(-1);});
+  document.getElementById('next').addEventListener('click',function(){step(1);});
+  dots.forEach(function(d,k){d.addEventListener('click',function(){goTo(k);start();});});
+  car.addEventListener('mouseenter',function(){hover=true;stop();});
+  car.addEventListener('mouseleave',function(){hover=false;start();});
+  car.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}if(e.key==='ArrowRight'){e.preventDefault();step(1);}});
+  var x0=null,y0=null;
+  car.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;stop();},{passive:true});
+  car.addEventListener('touchend',function(e){
+    if(x0==null)return;
+    var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))step(dx<0?1:-1);else start();
+    x0=null;y0=null;},{passive:true});
+  document.addEventListener('visibilitychange',function(){document.hidden?stop():start();});
+  goTo(0);start();
+})();
+</script>
+</body>
+</html>
