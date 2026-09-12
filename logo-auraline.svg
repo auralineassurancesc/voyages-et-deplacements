@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 172" width="520" height="172" role="img" aria-label="Auraline Assurances Courtage">
+  
+  <rect x="8" y="10" width="104" height="104" fill="none" stroke="#B08D57" stroke-width="2"></rect>
+  <circle cx="60" cy="62" r="38" fill="none" stroke="#F4F1EA" stroke-width="8"></circle>
+  <text x="150" y="70" font-family="Spectral, Georgia, 'Times New Roman', serif" font-size="62" font-weight="500" letter-spacing="6" fill="#F4F1EA">AURALINE</text>
+  <text x="152" y="100" font-family="'Source Sans 3', Arial, sans-serif" font-size="17" font-weight="500" letter-spacing="6.5" fill="#F4F1EA">ASSURANCES<tspan dx="10" fill="#B08D57">|</tspan><tspan dx="10" fill="#F4F1EA">COURTAGE</tspan></text>
+  <line x1="12" y1="142" x2="60" y2="142" stroke="#B08D57" stroke-width="1.2"></line>
+  <text x="262" y="146" font-family="'Source Sans 3', Arial, sans-serif" font-size="10.5" font-weight="500" letter-spacing="2.2" fill="#D7C9B0" text-anchor="middle">LA CONFIANCE AU CŒUR DE VOS PROTECTIONS</text>
+  <line x1="464" y1="142" x2="512" y2="142" stroke="#B08D57" stroke-width="1.2"></line>
+</svg>
