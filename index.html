@@ -16,13 +16,15 @@
   html,body{background:#14263E;font-family:var(--corps);color:var(--encre);-webkit-text-size-adjust:100%}
   a{color:var(--dore-300);text-decoration:none}a:hover{color:#E4CFAA}
   .wrap{position:relative;max-width:none;margin:0 auto;padding:clamp(12px,2vw,28px) clamp(10px,1.2vw,20px);min-height:calc(100dvh - var(--head, 104px));display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
-  .head{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin:0 0 clamp(14px,2vw,24px);flex:0 0 auto}
+  .head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;margin:0 0 clamp(8px,1vw,14px);flex:0 0 auto}
+  .head .filet{width:32px}
   .sur{font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--dore-300)}
   .sur.big{font-size:clamp(14px,1.5vw,20px)}
   .filet{display:block;width:56px;height:2px;background:var(--dore)}
-  .head h2{font-family:var(--titre);font-weight:400;font-size:clamp(22px,2.6vw,36px);line-height:1.2;color:#fff;margin:0;max-width:34ch;text-wrap:pretty}
+  .head h2{font-family:var(--titre);font-weight:400;font-size:clamp(22px,2.6vw,36px);line-height:1.2;color:#fff;margin:0;max-width:none;white-space:nowrap}
   .car{position:relative;width:100%;margin-left:auto;margin-right:auto;border-radius:10px;overflow:hidden;background:var(--marine-900);box-shadow:0 12px 36px rgba(31,58,95,.12),0 4px 10px rgba(31,58,95,.06);outline:none}
-  .stage{position:relative;width:100%;aspect-ratio:3/2;max-height:max(320px, calc(100dvh - var(--head, 104px) - 200px));margin:0 auto;overflow:hidden;touch-action:pan-y}
+  .stage{position:relative;width:100%;aspect-ratio:3/2;max-height:max(420px, calc(100dvh - var(--head, 104px) - 118px));margin:0 auto;overflow:hidden;touch-action:pan-y}
+  @media (max-width:700px){.head h2{white-space:normal;font-size:clamp(20px,4.6vw,28px)}}
   @media (max-width:560px){.stage{aspect-ratio:4/5;max-height:max(360px, calc(100dvh - var(--head, 104px) - 180px))}}
   .track{position:absolute;inset:0}
   .sl{position:absolute;inset:0;margin:0;opacity:0;overflow:hidden}
@@ -41,10 +43,16 @@
   .nav:focus-visible{box-shadow:0 0 0 3px rgba(176,141,87,.55)}
   .prev{right:calc(clamp(10px,1.5vw,24px) + 58px)}.next{right:clamp(10px,1.5vw,24px)}
   .nav{top:clamp(12px,2vw,24px);transform:none}
-  .dots{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:14px 18px;background:var(--marine-900)}
+  .dots{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:12px 18px;background:var(--marine-900)}
   .dots button{width:26px;height:3px;border:0;padding:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer;transition:background 220ms cubic-bezier(.4,0,.2,1)}
   .dots button:focus-visible{box-shadow:0 0 0 3px rgba(176,141,87,.55)}
-  .dots button[aria-current="true"]{background:var(--dore)}
+  .dots button{position:relative;overflow:hidden}
+  .dots button::after{content:"";position:absolute;inset:0;background:var(--dore);transform:scaleX(0);transform-origin:left;border-radius:999px}
+  .dots button[aria-current="true"]{background:rgba(176,141,87,.28)}
+  .dots button[aria-current="true"]::after{animation:fill var(--int,6000ms) linear forwards}
+  .dots.paused button[aria-current="true"]::after{animation-play-state:paused}
+  @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media (prefers-reduced-motion:reduce){.dots button[aria-current="true"]{background:var(--dore)}.dots button[aria-current="true"]::after{animation:none;transform:scaleX(1)}}
 
   /* --- page voyage --- */
   .sec{max-width:1264px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(16px,3vw,32px) clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)}
@@ -94,8 +102,8 @@
   .glass p{font-size:16px;line-height:1.65;color:#fff;margin:0;text-wrap:pretty}
   .partners{max-width:1264px;margin:0 auto;padding:clamp(32px,5vw,72px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:clamp(20px,3vw,32px);align-items:center;text-align:center}
   .partners .row{display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,28px);justify-content:center}
-  .partners .logo{background:#fff;border:1px solid #E6E0D2;border-radius:10px;box-shadow:0 1px 3px rgba(31,58,95,.08);padding:24px 36px;display:flex;align-items:center;justify-content:center;min-width:220px}
-  .partners .logo img{display:block;width:auto;max-width:100%;object-fit:contain}
+  .partners .logo{background:#fff;border:1px solid #E6E0D2;border-radius:10px;box-shadow:0 1px 3px rgba(31,58,95,.08);padding:24px 36px;display:flex;align-items:center;justify-content:center;width:300px;height:150px}
+  .partners .logo img{display:block;width:auto;max-width:100%;max-height:100%;object-fit:contain}
   footer.legal{background:rgba(10,20,34,.55);border-top:1px solid rgba(255,255,255,.14);padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:18px}
   footer.legal .links{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px}
   footer.legal .links a{color:rgba(244,241,234,.9);text-decoration:underline;text-underline-offset:3px}
@@ -124,11 +132,12 @@
   .mtog{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
   .burger{display:none;align-self:center;margin-left:auto;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;border:1px solid rgba(255,255,255,.3);border-radius:6px;cursor:pointer}
   .burger span{display:block;height:2px;background:#fff;border-radius:2px}
-  .sitehead a.brand{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 28px 14px 0;border-right:1px solid rgba(255,255,255,.18);text-decoration:none}
+  .sitehead a.brand{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 28px 14px 0;text-decoration:none}
   .sitehead .brand img{display:block;height:54px;width:auto}
-  .sitehead .brand .tag{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,241,234,.72);white-space:nowrap}
-  .sitehead nav{display:flex;flex-wrap:wrap;gap:2px clamp(12px,1.4vw,22px);align-items:center;padding:10px 0}
-  .sitehead nav a{font-family:var(--titre);font-size:clamp(13px,1.05vw,16px);letter-spacing:.05em;text-transform:uppercase;color:#fff;text-decoration:none;padding:8px 2px;border-bottom:2px solid transparent;white-space:nowrap;transition:color 180ms cubic-bezier(.4,0,.2,1),border-color 180ms}
+  .sitehead .brand .tag{display:none}
+  .sitehead nav{display:flex;flex:1 1 0;flex-wrap:nowrap;gap:0 clamp(8px,0.9vw,18px);align-items:center;justify-content:flex-end;padding:10px 0;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .sitehead nav::-webkit-scrollbar{display:none}
+  .sitehead nav a{font-family:var(--titre);font-size:clamp(12px,0.82vw,15px);letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;color:#fff;text-decoration:none;padding:8px 2px;border-bottom:2px solid transparent;white-space:nowrap;transition:color 180ms cubic-bezier(.4,0,.2,1),border-color 180ms}
   .sitehead nav a:hover,.sitehead nav a:focus-visible{color:var(--dore-300);border-bottom-color:var(--dore)}
   .sitehead nav a[aria-current="page"]{color:var(--dore-300);border-bottom-color:var(--dore)}
   @media (max-width:1250px){
@@ -474,8 +483,8 @@
   <span class="sur">Assureurs partenaires pour les assurances voyage</span>
   <i class="filet"></i>
   <div class="row">
-    <div class="logo"><img src="logo-acs.png" alt="ACS — L'assurance qui bouge avec vous" style="height:56px" loading="lazy" decoding="async"></div>
-    <div class="logo"><img src="logo-april.png" alt="April" style="height:44px" loading="lazy" decoding="async"></div>
+    <div class="logo"><img src="logo-acs.png" alt="ACS — L'assurance qui bouge avec vous" style="height:70px" loading="lazy" decoding="async"></div>
+    <div class="logo"><img src="logo-april.png" alt="April" style="height:52px" loading="lazy" decoding="async"></div>
   </div>
 </section>
 
@@ -517,7 +526,7 @@
   var track=document.getElementById('track'),slats=document.getElementById('slats'),dotsBox=document.getElementById('dots'),car=document.getElementById('car');
   var slides=[].slice.call(track.children),panels=[].slice.call(slats.children),dots=[].slice.call(dotsBox.children);
   var i=0,animating=false,pending=null,settle=null,timer=null,hover=false,first=true;
-  var DUR=460,STEP=16,INTERVAL=6000;
+  var DUR=900,STEP=26,INTERVAL=6000;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function setDots(n){dots.forEach(function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});}
   function commit(n){clearTimeout(settle);i=n;pending=null;animating=false;
@@ -540,15 +549,19 @@
       el.style.backgroundSize=sw+'px '+sh+'px';
       el.style.backgroundPosition=(ox-k*pw)+'px '+oy+'px';
       el.style.clipPath='inset(0 100% 0 0)';
-      return el.animate([{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],{duration:DUR,delay:k*STEP,easing:'cubic-bezier(.22,.61,.36,1)',fill:'forwards'});
+      return el.animate([{clipPath:'inset(0 100% 0 0)',opacity:.55},{opacity:1,offset:.25},{clipPath:'inset(0 0 0 0)',opacity:1}],{duration:DUR,delay:k*STEP,easing:'cubic-bezier(.33,0,.12,1)',fill:'forwards'});
     });
     setDots(n);
     Promise.all(anims.map(function(a){return a.finished;})).then(function(){if(pending===n)commit(n);})['catch'](function(){});
     settle=setTimeout(function(){if(animating&&pending===n)commit(n);},DUR+STEP*(N-1)+200);
   }
   var stage=document.querySelector('.stage');
-  function stop(){if(timer)clearInterval(timer);timer=null;}
-  function start(){stop();if(hover||document.hidden)return;timer=setInterval(function(){goTo(i+1);},INTERVAL);}
+  function stop(){if(timer)clearInterval(timer);timer=null;dotsBox.classList.add('paused');}
+  function start(){stop();
+    dotsBox.style.setProperty('--int',INTERVAL+'ms');
+    if(hover||document.hidden){dotsBox.classList.add('paused');return;}
+    dotsBox.classList.remove('paused');
+    timer=setInterval(function(){goTo(i+1);},INTERVAL);}
   function step(d){goTo(i+d);start();}
   document.getElementById('prev').addEventListener('click',function(){step(-1);});
   document.getElementById('next').addEventListener('click',function(){step(1);});
